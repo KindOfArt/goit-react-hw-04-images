@@ -26,39 +26,39 @@ const App = () => {
   const getSearchQuery = newQuery =>
     searchQuery !== newQuery ? setSearchQuery(newQuery) : '';
 
+  const onLoadMore = () => setPage(prev => prev + 1);
+
+  const closeModal = () => setIsModalOpen(prev => !prev);
+
+  const isLoadToggle = () => setIsLoad(prev => !prev);
+
   useEffect(() => {
     if (!searchQuery) {
       return;
     }
 
-    fetchImagesAPI(searchQuery, page, setError, setIsLoad)
-      .then(imgArray => {
-        isLoadToggle();
+    isLoadToggle();
 
+    fetchImagesAPI(searchQuery, page)
+      .then(imgArray => {
         const filteredImg = filterImages(imgArray);
 
         return filteredImg;
       })
       .then(filteredImgArray => {
         setImages(prev => [...prev, ...filteredImgArray]);
+        isLoadToggle();
       })
       .catch(err => {
         setError(err);
         console.log(error);
-      })
-      .finally(isLoadToggle());
+      });
   }, [error, page, searchQuery]);
 
   const getLargeImage = largeImage => {
     setLargeImage(largeImage);
     setIsModalOpen(true);
   };
-
-  const onLoadMore = () => setPage(prev => prev + 1);
-
-  const closeModal = () => setIsModalOpen(prev => !prev);
-
-  const isLoadToggle = () => setIsLoad(prev => !prev);
 
   const barStyle = {
     margin: '0  auto',
