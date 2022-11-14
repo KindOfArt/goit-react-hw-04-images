@@ -11,7 +11,7 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
 
-  const [_, setError] = useState('');
+  const [error, setError] = useState('');
   const [largeImage, setLargeImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
@@ -39,12 +39,15 @@ const App = () => {
 
         return filteredImg;
       })
-      .then(filteredImgArray =>
-        setImages(prev => [...prev, ...filteredImgArray])
-      )
-      .catch(error => setError(error))
+      .then(filteredImgArray => {
+        setImages(prev => [...prev, ...filteredImgArray]);
+      })
+      .catch(err => {
+        setError(err);
+        console.log(error);
+      })
       .finally(isLoadToggle());
-  }, [page, searchQuery]);
+  }, [error, page, searchQuery]);
 
   const getLargeImage = largeImage => {
     setLargeImage(largeImage);
