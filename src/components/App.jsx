@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ProgressBar } from 'react-loader-spinner';
 import Button from './Button/Button';
 import fetchImagesAPI from './helps/fetchImages';
@@ -66,27 +65,7 @@ const App = () => {
       <Searchbar onSubmit={getSearchQuery}>
         <Button type="submit" label="Search image" classNameButton="Button" />
       </Searchbar>
-
       {images.length > 0 && !isLoad && (
-        <ImageGallery getLargeImage={getLargeImage} images={images} />
-      )}
-
-      {isLoad ?? <ProgressBar
-              height="80"
-              width="80"
-              ariaLabel="progress-bar-loading"
-              wrapperStyle={barStyle}
-              wrapperClass="progress-bar-wrapper"
-              borderColor="#F4442E"
-              barColor="#51E5FF"
-            /> : <Button
-            onLoadMore={onLoadMore}
-            type="button"
-            label="Load more"
-            classNameButton="Button"
-          /> }
-
-      {/* {images.length > 0 && (
         <>
           <ImageGallery getLargeImage={getLargeImage} images={images} />
           {isLoad ? (
@@ -108,7 +87,8 @@ const App = () => {
             />
           )}
         </>
-      )} */}
+      )}
+
       {isModalOpen && <Modal closeModal={closeModal} largeImage={largeImage} />}
     </div>
   );
