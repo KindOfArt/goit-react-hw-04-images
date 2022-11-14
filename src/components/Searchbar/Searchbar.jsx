@@ -1,45 +1,38 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
-import { Component } from 'react';
+const Searchbar = ({ children, onSubmit }) => {
+  const [inputValue, setInputValue] = useState('');
 
-export default class Searchbar extends Component {
-  state = { inputQuery: '' };
+  const onInputChange = e => setInputValue(e.currentTarget.value);
 
-  onInputChange = e => {
-    this.setState({ inputQuery: e.currentTarget.value });
-  };
-
-  onFormSubmit = e => {
+  const onFormSubmit = e => {
     e.preventDefault();
 
-    const { onSubmit } = this.props;
-
-    onSubmit(this.state.inputQuery);
+    onSubmit(inputValue);
   };
 
-  render() {
-    const { children } = this.props;
-
-    return (
-      <header className="Searchbar">
-        <form onSubmit={this.onFormSubmit} className="SearchForm">
-          <input
-            value={this.state.inputQuery}
-            onChange={this.onInputChange}
-            className="SearchForm-input"
-            type="text"
-            autoComplete="off"
-            autoFocus
-            placeholder="Search images and photos"
-          />
-          {children}
-        </form>
-      </header>
-    );
-  }
-}
+  return (
+    <header className="Searchbar">
+      <form onSubmit={onFormSubmit} className="SearchForm">
+        <input
+          value={inputValue}
+          onChange={onInputChange}
+          className="SearchForm-input"
+          type="text"
+          autoComplete="off"
+          autoFocus
+          placeholder="Search images and photos"
+        />
+        {children}
+      </form>
+    </header>
+  );
+};
 
 Searchbar.propTypes = {
   children: PropTypes.element.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
+
+export default Searchbar;

@@ -1,6 +1,7 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Button = ({ type, label, classNameButton, onLoadMore }) => {
+const Button = ({ type, label, classNameButton, onLoadMore }) => {
   return (
     <button onClick={onLoadMore} type={type} className={classNameButton}>
       <span>{label}</span>
@@ -20,3 +21,5 @@ Button.propTypes = {
     PropTypes.func.isRequired,
   ]),
 };
+
+export default Button;
