@@ -60,20 +60,7 @@ const App = () => {
     margin: '0  auto',
   };
 
-  return (
-    <div className="App">
-      <Searchbar onSubmit={getSearchQuery}>
-        <Button type="submit" label="Search image" classNameButton="Button" />
-      </Searchbar>
-
-      {images.length > 0 && !isLoad && (
-        <>
-          <ImageGallery getLargeImage={getLargeImage} images={images} />
-        </>
-      )}
-      {isModalOpen && <Modal closeModal={closeModal} largeImage={largeImage} />}
-    </div>
-  );
+  return ()
 };
 
 export default App;
