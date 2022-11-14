@@ -71,8 +71,12 @@ const App = () => {
           <ImageGallery getLargeImage={getLargeImage} images={images} />
         </>
       )}
+      {isModalOpen && <Modal closeModal={closeModal} largeImage={largeImage} />}
+    </div>
+  );
+};
 
-      {/* {images.length > 0 && !isLoad && (
+/* {images.length > 0 && !isLoad && (
         <>
           <ImageGallery getLargeImage={getLargeImage} images={images} />
           {isLoad ? (
@@ -94,11 +98,6 @@ const App = () => {
             />
           )}
         </>
-      )} */}
-
-      {isModalOpen && <Modal closeModal={closeModal} largeImage={largeImage} />}
-    </div>
-  );
-};
+      )} */
 
 export default App;
