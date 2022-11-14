@@ -11,7 +11,7 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
 
-  const [error, setError] = useState('');
+  const [setError] = useState('');
   const [largeImage, setLargeImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
