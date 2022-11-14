@@ -31,7 +31,7 @@ const App = () => {
       return;
     }
 
-    fetchImagesAPI(searchQuery, page, setPage, setIsLoad)
+    fetchImagesAPI(searchQuery, page, setError, setIsLoad)
       .then(imgArray => {
         isLoadToggle();
 
