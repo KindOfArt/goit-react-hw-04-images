@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function fetchImagesAPI(query, pageNumber) {
+export default function fetchImagesAPI(query, pageNumber, page, isLoad) {
   axios.defaults.baseURL = 'https://pixabay.com/api';
 
   const params = {
@@ -16,6 +16,8 @@ export default function fetchImagesAPI(query, pageNumber) {
       params,
     })
     .then(res => {
+      page(1);
+      isLoad(true);
       const { hits } = res.data;
 
       return hits;

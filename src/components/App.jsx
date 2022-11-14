@@ -10,13 +10,11 @@ const App = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [page, setPage] = useState(1);
   const [images, setImages] = useState([]);
-  const [error, setError] = useState(null);
+
+  const [error, setError] = useState('');
   const [largeImage, setLargeImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
-
-  const getSearchQuery = newQuery =>
-    searchQuery !== newQuery ? setSearchQuery(newQuery) : '';
 
   const filterImages = images =>
     images.map(({ id, webformatURL, largeImageURL }) => ({
@@ -25,12 +23,15 @@ const App = () => {
       largeImageURL,
     }));
 
+  const getSearchQuery = newQuery =>
+    searchQuery !== newQuery ? setSearchQuery(newQuery) : '';
+
   useEffect(() => {
     if (!searchQuery) {
       return;
     }
 
-    fetchImagesAPI(searchQuery, page)
+    fetchImagesAPI(searchQuery, page, setPage, setIsLoad)
       .then(imgArray => {
         isLoadToggle();
 
@@ -42,7 +43,7 @@ const App = () => {
         setImages(prev => [...prev, ...filteredImgArray])
       )
       .catch(error => setError(error))
-      .finally(() => isLoadToggle());
+      .finally(isLoadToggle());
   }, [page, searchQuery]);
 
   const getLargeImage = largeImage => {
@@ -60,7 +61,37 @@ const App = () => {
     margin: '0  auto',
   };
 
-  return <div></div>;
+  return (
+    <div className="App">
+      <Searchbar onSubmit={getSearchQuery}>
+        <Button type="submit" label="Search image" classNameButton="Button" />
+      </Searchbar>
+      {images.length > 0 && (
+        <>
+          <ImageGallery getLargeImage={getLargeImage} images={images} />
+          {isLoad ? (
+            <ProgressBar
+              height="80"
+              width="80"
+              ariaLabel="progress-bar-loading"
+              wrapperStyle={barStyle}
+              wrapperClass="progress-bar-wrapper"
+              borderColor="#F4442E"
+              barColor="#51E5FF"
+            />
+          ) : (
+            <Button
+              onLoadMore={onLoadMore}
+              type="button"
+              label="Load more"
+              classNameButton="Button"
+            />
+          )}
+        </>
+      )}
+      {isModalOpen && <Modal closeModal={closeModal} largeImage={largeImage} />}
+    </div>
+  );
 };
 
 export default App;
