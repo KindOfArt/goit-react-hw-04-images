@@ -60,7 +60,7 @@ const App = () => {
     margin: '0  auto',
   };
 
-  return ()
+  return <div></div>;
 };
 
 export default App;
