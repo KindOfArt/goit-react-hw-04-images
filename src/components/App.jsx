@@ -76,28 +76,4 @@ const App = () => {
   );
 };
 
-/* {images.length > 0 && !isLoad && (
-        <>
-          <ImageGallery getLargeImage={getLargeImage} images={images} />
-          {isLoad ? (
-            <ProgressBar
-              height="80"
-              width="80"
-              ariaLabel="progress-bar-loading"
-              wrapperStyle={barStyle}
-              wrapperClass="progress-bar-wrapper"
-              borderColor="#F4442E"
-              barColor="#51E5FF"
-            />
-          ) : (
-            <Button
-              onLoadMore={onLoadMore}
-              type="button"
-              label="Load more"
-              classNameButton="Button"
-            />
-          )}
-        </>
-      )} */
-
 export default App;
