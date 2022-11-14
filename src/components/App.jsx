@@ -65,7 +65,14 @@ const App = () => {
       <Searchbar onSubmit={getSearchQuery}>
         <Button type="submit" label="Search image" classNameButton="Button" />
       </Searchbar>
+
       {images.length > 0 && !isLoad && (
+        <>
+          <ImageGallery getLargeImage={getLargeImage} images={images} />
+        </>
+      )}
+
+      {/* {images.length > 0 && !isLoad && (
         <>
           <ImageGallery getLargeImage={getLargeImage} images={images} />
           {isLoad ? (
@@ -87,7 +94,7 @@ const App = () => {
             />
           )}
         </>
-      )}
+      )} */}
 
       {isModalOpen && <Modal closeModal={closeModal} largeImage={largeImage} />}
     </div>
