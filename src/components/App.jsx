@@ -47,12 +47,12 @@ const App = () => {
       })
       .then(filteredImgArray => {
         setImages(prev => [...prev, ...filteredImgArray]);
-        isLoadToggle();
       })
       .catch(err => {
         setError(err);
         console.log(error);
-      });
+      })
+      .finally(() => isLoadToggle());
   }, [error, page, searchQuery]);
 
   const getLargeImage = largeImage => {
@@ -69,6 +69,7 @@ const App = () => {
       <Searchbar onSubmit={getSearchQuery}>
         <Button type="submit" label="Search image" classNameButton="Button" />
       </Searchbar>
+
       {images.length > 0 && (
         <>
           <ImageGallery getLargeImage={getLargeImage} images={images} />
